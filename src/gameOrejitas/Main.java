@@ -63,6 +63,9 @@ public class Main extends PApplet {
 	PImage play1;
 	PImage play2;
 	PImage game;
+	PImage reset1;
+	PImage reset2;
+	
 	
 	
 	public void settings() {
@@ -96,7 +99,9 @@ public class Main extends PApplet {
 		next2 = loadImage("next2.png");
 		play1 = loadImage("play1.png");
 		play2 = loadImage("play2.png");
-		game = loadImage("GAME.png");	
+		game = loadImage("GAME.png");
+		reset1 = loadImage("reset1.png");
+		reset2 = loadImage("reset2.png");
 	}
 	
 	public void draw() {
@@ -164,6 +169,26 @@ public class Main extends PApplet {
 				image(next2, width - value, value + 19, value, value);
 			}
 			break;
+		
+		case 3:
+			
+			// Game image
+			image(game, width / 2, height / 2, width, height);
+			
+			// Back button
+			if (buttonBack == false) {
+				image(back1, value, value + 19, value, value);
+			} else {
+				image(back2, value, value + 19, value, value);
+			}
+			
+			// Next button
+			if (buttonReset == false) {
+				image(reset1, width - value, value + 19, value, value);
+			} else {
+				image(reset2, width - value, value + 19, value, value);
+			}
+			break;
 			
 		}
 	}
@@ -211,7 +236,20 @@ public class Main extends PApplet {
 			} else {
 				buttonNext = false;
 			}
-
+			break;
+			
+		case 3:
+			if (mouseX > 19 && mouseX < 19 + value && mouseY > value && mouseY < value + value) {
+				buttonBack = true;
+			} else {
+				buttonBack = false;
+			}
+			
+			if (mouseX > width - value - 19 && mouseX < width - 19 && mouseY > value && mouseY < value + value) {
+				buttonReset = true;
+			} else {
+				buttonReset = false;
+			}
 			break;
 			
 		}
@@ -236,9 +274,10 @@ public class Main extends PApplet {
 			}
 
 			if (mouseX > 303 && mouseX < 466 && mouseY > 567 && mouseY < 611) {
-				screen = 0;
+				screen = 3;
 			}
 			break;
+			
 		case 2:
 			if (mouseX > 19 && mouseX < 57 && mouseY > value && mouseY < value + value) {
 				screen = 0;
@@ -246,7 +285,18 @@ public class Main extends PApplet {
 
 			if (mouseX > width - value - 19 && mouseX < width - 19 && mouseY > value && mouseY < value + value) {
 				//setup();
-				screen = 1;
+				screen = 3;
+			}
+			break;
+			
+		case 3:
+			if (mouseX > 19 && mouseX < 57 && mouseY > value && mouseY < value + value) {
+				screen = 0;
+			}
+			
+			if (mouseX > width - value - 19 && mouseX < width - 19 && mouseY > value && mouseY < value + value) {
+				//setup();
+				screen = 0;
 			}
 			break;
 			
