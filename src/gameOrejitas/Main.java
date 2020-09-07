@@ -83,7 +83,7 @@ public class Main extends PApplet {
 		name = loadImage("NAME.png");
 		play1 = loadImage("play1.png");
 		play2 = loadImage("play2.png");	
-		//Fdfsdf
+		//Fdfsdfesrfeewd
 	}
 	
 	public void draw() {
