@@ -39,6 +39,7 @@ public class Main extends PApplet {
 	
 	// Declare variables
 	int screen;
+	int value;	// Constant value
 	
 	boolean buttonStart;
 	boolean buttonInstructions;
@@ -54,8 +55,14 @@ public class Main extends PApplet {
 	PImage instructions1;
 	PImage instructions2;
 	PImage name;
+	PImage instructions;
+	PImage back1;
+	PImage back2;
+	PImage next1;
+	PImage next2;
 	PImage play1;
 	PImage play2;
+	PImage game;
 	
 	
 	public void settings() {
@@ -66,6 +73,7 @@ public class Main extends PApplet {
 		
 		// Initialize variables
 		screen = 0;
+		value = 38;
 		
 		buttonStart = false;
 		buttonInstructions = false;
@@ -81,9 +89,14 @@ public class Main extends PApplet {
 		instructions1 = loadImage("instructions1.png");
 		instructions2 = loadImage("instructions2.png");
 		name = loadImage("NAME.png");
+		instructions = loadImage("INSTRUCTIONS.png");
+		back1 = loadImage("back1.png");
+		back2 = loadImage("back2.png");
+		next1 = loadImage("next1.png");
+		next2 = loadImage("next2.png");
 		play1 = loadImage("play1.png");
-		play2 = loadImage("play2.png");	
-		//Fdfsdfesrfeewd
+		play2 = loadImage("play2.png");
+		game = loadImage("GAME.png");	
 	}
 	
 	public void draw() {
@@ -131,6 +144,27 @@ public class Main extends PApplet {
 				image(play2, width / 2 + 100, 589, 163, 43);
 			}
 			break;
+			
+		case 2:
+			
+			// Instructions image
+			image(instructions, width / 2, height / 2, width, height);
+			
+			// Back button
+			if (buttonBack == false) {
+				image(back1, value, value + 19, value, value);
+			} else {
+				image(back2, value, value + 19, value, value);
+			}
+			
+			// Next button
+			if (buttonNext == false) {
+				image(next1, width - value, value + 19, value, value);
+			} else {
+				image(next2, width - value, value + 19, value, value);
+			}
+			break;
+			
 		}
 	}
 	
@@ -165,6 +199,21 @@ public class Main extends PApplet {
 			}
 			break;
 			
+		case 2:
+			if (mouseX > 19 && mouseX < 19 + value && mouseY > value && mouseY < value + value) {
+				buttonBack = true;
+			} else {
+				buttonBack = false;
+			}
+
+			if (mouseX > width - value - 19 && mouseX < width - 19 && mouseY > value && mouseY < value + value) {
+				buttonNext = true;
+			} else {
+				buttonNext = false;
+			}
+
+			break;
+			
 		}
 	}
 	
@@ -173,7 +222,7 @@ public class Main extends PApplet {
 		
 		case 0: // Starting screen
 			if (mouseX > 103 && mouseX < 265 && mouseY > 567 && mouseY < 611) {
-				screen = 1;
+				screen = 2;
 			}
 
 			if (mouseX > 303 && mouseX < 466 && mouseY > 567 && mouseY < 611) {
@@ -183,13 +232,24 @@ public class Main extends PApplet {
 		
 		case 1: // Name screen
 			if (mouseX > 103 && mouseX < 265 && mouseY > 567 && mouseY < 611) {
-				screen = 0;
+				screen = 2;
 			}
 
 			if (mouseX > 303 && mouseX < 466 && mouseY > 567 && mouseY < 611) {
 				screen = 0;
 			}
 			break;
+		case 2:
+			if (mouseX > 19 && mouseX < 57 && mouseY > value && mouseY < value + value) {
+				screen = 0;
+			} 
+
+			if (mouseX > width - value - 19 && mouseX < width - 19 && mouseY > value && mouseY < value + value) {
+				//setup();
+				screen = 1;
+			}
+			break;
+			
 		}
 	}
 	
